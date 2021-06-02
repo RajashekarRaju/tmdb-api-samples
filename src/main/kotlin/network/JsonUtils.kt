@@ -1,0 +1,70 @@
+package network
+
+import modal.Movie
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.logging.Logger
+
+
+fun getJsonLatestMovieData(
+    jsonResponse: String?
+): Movie? {
+
+    var movie: Movie? = null
+
+    try {
+        // Create a JSONObject from the JSON response string
+        val baseJson = JSONObject(jsonResponse)
+
+        val movieId: Int = baseJson.getInt("id")
+        val title: String? = baseJson.getString("title")
+        val bannerEndPoint: String? = baseJson.getString("poster_path")
+        val bannerUrl: String = IMAGE_PATH_URL + bannerEndPoint
+
+        // Create a new {@link Movie} object with required properties
+        movie = Movie(movieId, title, bannerUrl)
+
+    } catch (e: JSONException) {
+        //Log.error("Problem parsing the Movie JSON results $e")
+        Logger.getLogger("Problem parsing the Movie JSON results $e")
+    }
+    // Return the list of Movies
+    return movie
+}
+
+
+/**
+ * Return a list of [Movie] objects that has been built up from parsing a JSON response.
+ */
+fun getJsonMovieData(
+    jsonResponse: String?
+): List<Movie> {
+
+    val movieData: MutableList<Movie> = ArrayList()
+
+    try {
+        // Create a JSONObject from the JSON response string
+        val baseJson = JSONObject(jsonResponse)
+        val resultsArray = baseJson.getJSONArray("results")
+        for (i in 0 until resultsArray.length()) {
+
+            // Create a JSONObject from the JSON response string
+            val jsonObject = resultsArray.getJSONObject(i)
+
+            val movieId: Int = jsonObject.getInt("id")
+            val title: String? = jsonObject.getString("title")
+            val bannerEndPoint: String? = jsonObject.getString("poster_path")
+            val bannerUrl: String = IMAGE_PATH_URL + bannerEndPoint
+
+            // Create a new {@link Movie} object with required properties
+            val currentMovie = Movie(movieId, title, bannerUrl)
+            // Add the new {@link Movie} to the list of movies.
+            movieData.add(currentMovie)
+        }
+    } catch (e: JSONException) {
+        //Log.error("Problem parsing the Movie JSON results $e")
+        Logger.getLogger("Problem parsing the Movie JSON results $e")
+    }
+    // Return the list of Movies
+    return movieData
+}
