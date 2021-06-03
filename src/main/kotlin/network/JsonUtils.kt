@@ -1,6 +1,7 @@
 package network
 
 import modal.Movie
+import modal.MovieDetails
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.logging.Logger
@@ -67,4 +68,29 @@ fun getJsonMovieData(
     }
     // Return the list of Movies
     return movieData
+}
+
+/**
+ *  Return MovieDetails objects that has been built up from parsing a JSON response.
+ */
+fun getJsonMovieDetailsData(
+    jsonResponse: String?
+): MovieDetails? {
+
+    var movie: MovieDetails? = null
+
+    try {
+        // Create a JSONObject from the JSON response string
+        val baseJson = JSONObject(jsonResponse)
+        val runtime: Int = baseJson.getInt("runtime")
+
+        // Create a new {@link Movie} object with required properties
+        movie = MovieDetails(runtime)
+
+    } catch (e: JSONException) {
+        //Log.error("Problem parsing the Movie JSON results $e")
+        Logger.getLogger("Problem parsing the Movie JSON results $e")
+    }
+    // Return the MovieDetails
+    return movie
 }

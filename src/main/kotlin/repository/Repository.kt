@@ -1,6 +1,7 @@
 package repository
 
 import modal.Movie
+import modal.MovieDetails
 import network.*
 
 class Repository {
@@ -15,5 +16,9 @@ class Repository {
 
     fun getLatestMovie(): Movie? {
         return buildMovieLatestType(TYPE_MOVIES_LATEST)
+    }
+
+    fun getMovieDetails(movieId: Int): MovieDetails? {
+        return buildDetailsMovies(movieId)
     }
 }
