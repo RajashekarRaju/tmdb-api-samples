@@ -1,6 +1,7 @@
 package network
 
 import modal.Movie
+import modal.MovieDetails
 import java.net.URI
 import java.net.URL
 
@@ -46,6 +47,27 @@ fun movieLatestUriBuilder(
     movieType: String
 ): URL {
     val builtUrl = "$MOVIE_PATH$movieType$APPEND_URL_ENDPOINT$assignApiKey"
+    val baseUri = URI.create(builtUrl)
+    return URL(baseUri.toString())
+}
+
+//get details
+fun buildDetailsMovies(
+    movieId: Int
+): MovieDetails? {
+    val builtUrl = movieDetailsUriBuilder(movieId)
+    return getJsonMovieDetailsData(createUrl(builtUrl))
+}
+
+/**
+ * movieType = Replace this string with "popular", "now_playing", "top_rated", "upcoming".
+ *
+ * https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
+ */
+fun movieDetailsUriBuilder(
+    movieId: Int
+): URL {
+    val builtUrl = "$MOVIE_PATH$movieId$APPEND_URL_ENDPOINT$assignApiKey"
     val baseUri = URI.create(builtUrl)
     return URL(baseUri.toString())
 }
