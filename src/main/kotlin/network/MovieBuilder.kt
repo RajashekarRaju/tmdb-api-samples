@@ -51,10 +51,6 @@ fun movieLatestUriBuilder(
     return URL(baseUri.toString())
 }
 
-
-
-
-
 //get details
 fun buildDetailsMovies(
     movieId: Int
