@@ -15,6 +15,6 @@ dependencies {
     implementation("org.json:json:20171018")
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
