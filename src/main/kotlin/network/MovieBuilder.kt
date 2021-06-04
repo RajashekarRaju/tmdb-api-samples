@@ -2,6 +2,7 @@ package network
 
 import modal.Movie
 import modal.MovieDetails
+import repository.movieDetailsUriBuilder
 import java.net.URI
 import java.net.URL
 
@@ -57,17 +58,4 @@ fun buildDetailsMovies(
 ): MovieDetails? {
     val builtUrl = movieDetailsUriBuilder(movieId)
     return getJsonMovieDetailsData(createUrl(builtUrl))
-}
-
-/**
- * movieType = Replace this string with "popular", "now_playing", "top_rated", "upcoming".
- *
- * https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
- */
-fun movieDetailsUriBuilder(
-    movieId: Int
-): URL {
-    val builtUrl = "$MOVIE_PATH$movieId$APPEND_URL_ENDPOINT$assignApiKey"
-    val baseUri = URI.create(builtUrl)
-    return URL(baseUri.toString())
 }
