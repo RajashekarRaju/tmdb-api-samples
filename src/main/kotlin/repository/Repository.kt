@@ -21,8 +21,4 @@ class Repository {
     fun getMovieDetails(movieId: Int): MovieDetails? {
         return buildDetailsMovies(movieId)
     }
-
-    fun getNowplayingMovies(): List<Movie> {
-        return buildMovieListType(TYPE_MOVIES_NOW_PLAYING)
-    }
 }
