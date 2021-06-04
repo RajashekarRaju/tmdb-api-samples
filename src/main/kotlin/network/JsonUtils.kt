@@ -3,6 +3,7 @@ package network
 import modal.Movie
 import modal.MovieAlternativeTitles
 import modal.MovieDetails
+import modal.People
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.logging.Logger
@@ -126,4 +127,43 @@ fun getJsonAlternativeTitles(
     }
     // Return the list of Movies
     return movieData
+}
+
+/** Get peoples Json data. **/
+fun getJsonPopularPeopleData(
+    jsonResponse: String?
+): List<People> {
+
+    val peopleData: MutableList<People> = ArrayList()
+
+    try {
+        // Create a JSONObject from the JSON response string
+        val baseJson = JSONObject(jsonResponse)
+        val resultsArray = baseJson.getJSONArray("results")
+        for (i in 0 until resultsArray.length()) {
+
+            // Create a JSONObject from the JSON response string
+            val jsonObject = resultsArray.getJSONObject(i)
+
+            val peopleId: Int = jsonObject.getInt("id")
+            val name: String? = jsonObject.getString("name")
+            val popularity: Double = jsonObject.getDouble("popularity")
+            val department: String = jsonObject.getString("known_for_department")
+            val profileEndPoint: String? = jsonObject.getString("poster_path")
+            val profileUrl: String = IMAGE_PATH_URL + profileEndPoint
+
+            // Create a new {@link Movie} object with required properties
+            val currentPeople = People(peopleId, name, popularity, profileUrl, department)
+            // Add the new {@link Movie} to the list of movies.
+            peopleData.add(currentPeople)
+
+            println(peopleData)
+
+        }
+    } catch (e: JSONException) {
+        //Log.error("Problem parsing the Movie JSON results $e")
+        Logger.getLogger("Problem parsing the People JSON results $e")
+    }
+    // Return the list of Movies
+    return peopleData
 }

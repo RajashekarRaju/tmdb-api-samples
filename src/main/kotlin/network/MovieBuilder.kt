@@ -3,7 +3,6 @@ package network
 import modal.Movie
 import modal.MovieAlternativeTitles
 import modal.MovieDetails
-import repository.movieDetailsUriBuilder
 import java.net.URI
 import java.net.URL
 
@@ -14,7 +13,9 @@ import java.net.URL
 // https://api.themoviedb.org/3/movie/454292/credits?api_key=
 // https://api.themoviedb.org/3/movie/27576?api_key=
 
-// popular
+/**
+ * Returns the url string with appended endpoint.
+ */
 fun buildMovieListType(
     movieType: String
 ): List<Movie> {
@@ -27,7 +28,7 @@ fun buildMovieListType(
  *
  * https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
  */
-fun movieTypeUriBuilder(
+private fun movieTypeUriBuilder(
     movieType: String
 ): URL {
     val builtUrl = "$MOVIE_PATH$movieType$APPEND_URL_ENDPOINT$assignApiKey"
@@ -35,17 +36,20 @@ fun movieTypeUriBuilder(
     return URL(baseUri.toString())
 }
 
-
-// popular
+/**
+ * Returns single [Movie] object properties from json response.
+ */
 fun buildMovieLatestType(
     movieType: String
 ): Movie? {
     val builtUrl = movieLatestUriBuilder(movieType)
-    println(builtUrl)
     return getJsonLatestMovieData(createUrl(builtUrl))
 }
 
-fun movieLatestUriBuilder(
+/**
+ * Builds and returns the url string for single [Movie] object.
+ */
+private fun movieLatestUriBuilder(
     movieType: String
 ): URL {
     val builtUrl = "$MOVIE_PATH$movieType$APPEND_URL_ENDPOINT$assignApiKey"
@@ -53,10 +57,51 @@ fun movieLatestUriBuilder(
     return URL(baseUri.toString())
 }
 
-//get details
+/**
+ * Returns the json response of type [Movie] object.
+ */
 fun buildDetailsMovies(
     movieId: Int
 ): MovieDetails? {
     val builtUrl = movieDetailsUriBuilder(movieId)
     return getJsonMovieDetailsData(createUrl(builtUrl))
+}
+
+/**
+ * movieId = Replace this with different movie id's.
+ * builtUrl = https://api.themoviedb.org/3/movie/27576?api_key=API_KEY
+ * Creates a URI by parsing the given string.
+ * returns a url
+ */
+private fun movieDetailsUriBuilder(
+    movieId: Int
+): URL {
+    val builtUrl = "$MOVIE_PATH$movieId$APPEND_URL_ENDPOINT$assignApiKey"
+    val baseUri = URI.create(builtUrl)
+    return URL(baseUri.toString())
+}
+
+/**
+ * Builds and returns List of [Movie] objects for alternative titles for single movie
+ * by using id of the movie.
+ */
+fun buildAlternativeTitles(
+    movieId: Int
+): List<MovieAlternativeTitles> {
+    val builtUrl = movieAlternativeTitlesUriBuilder(movieId)
+    return getJsonAlternativeTitles(createUrl(builtUrl))
+}
+
+/**
+ * movieId = Replace this with different movie id's.
+ * builtUrl = https://api.themoviedb.org/3/movie/27576/alternative_titles?api_key=API_KEY
+ * Creates a URI by parsing the given string.
+ * returns a url
+ */
+private fun movieAlternativeTitlesUriBuilder(
+    movieId: Int
+): URL {
+    val builtUrl = "$MOVIE_PATH$movieId$ALTERNATIVE_TITLES$APPEND_URL_ENDPOINT$assignApiKey"
+    val baseUri = URI.create(builtUrl)
+    return URL(baseUri.toString())
 }
