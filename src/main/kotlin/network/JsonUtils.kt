@@ -1,6 +1,7 @@
 package network
 
 import modal.Movie
+import modal.MovieAlternativeTitles
 import modal.MovieDetails
 import org.json.JSONException
 import org.json.JSONObject
@@ -93,4 +94,36 @@ fun getJsonMovieDetailsData(
     }
     // Return the MovieDetails
     return movie
+}
+
+/**
+ * Alternative titles
+ */
+fun getJsonAlternativeTitles(
+    jsonResponse: String?
+): List<MovieAlternativeTitles> {
+
+    val movieData: MutableList<MovieAlternativeTitles> = ArrayList()
+
+    try {
+        // Create a JSONObject from the JSON response string
+        val baseJson = JSONObject(jsonResponse)
+        val resultsArray = baseJson.getJSONArray("titles")
+        for (i in 0 until resultsArray.length()) {
+
+            // Create a JSONObject from the JSON response string
+            val jsonObject = resultsArray.getJSONObject(i)
+            val alternativeTitle: String? = jsonObject.getString("title")
+
+            // Create a new {@link Movie} object with required properties
+            val currentMovie = MovieAlternativeTitles(alternativeTitle)
+            // Add the new {@link Movie} to the list of movies.
+            movieData.add(currentMovie)
+        }
+    } catch (e: JSONException) {
+        //Log.error("Problem parsing the Movie JSON results $e")
+        Logger.getLogger("Problem parsing the Movie JSON results $e")
+    }
+    // Return the list of Movies
+    return movieData
 }

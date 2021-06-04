@@ -3,6 +3,7 @@ Repository for students to practice and learn making http response to api url en
 
 ## Movie Category
 GET Details
+GET Alternative Titles
 GET Latest
 GET Now Playing
 GET Popular

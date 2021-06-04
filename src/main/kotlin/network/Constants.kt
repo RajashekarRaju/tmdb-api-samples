@@ -31,6 +31,7 @@ const val TYPE_MOVIES_LATEST = "latest"
 
 const val APPEND_PATH_SIMILAR = "similar"
 const val APPEND_PATH_RECOMMENDATIONS = "recommendations"
+const val ALTERNATIVE_TITLES = "/alternative_titles"
 
 // private const val APPEND_PATH_PERSON = "person"
 // private const val REVIEWS_PATH = "reviews"
