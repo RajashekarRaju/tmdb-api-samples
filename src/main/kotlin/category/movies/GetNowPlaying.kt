@@ -2,12 +2,11 @@ package category.movies
 
 import modal.Movie
 import repository.Repository
-import repository.getNowPlayingMovies
 
 fun main() {
 
     val repository = Repository()
-    val getNowPLayingMoviesList: List<Movie> = getNowPlayingMovies()
+    val getNowPLayingMoviesList: List<Movie> = repository.getNowPlayingMovies()
 
     getNowPLayingMoviesList.forEach { movie ->
         val movieId = movie.movieId

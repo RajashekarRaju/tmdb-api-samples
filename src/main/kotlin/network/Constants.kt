@@ -8,8 +8,8 @@ package network
 const val APPEND_QUERY_PARAMETER = "="
 private const val API_PARAM = "api_key"
 const val APPEND_URL_ENDPOINT = "?"
-const val APPEND_PARAMETER = "&"
-const val QUERY_PARAM = "query"
+// const val APPEND_PARAMETER = "&"
+// const val QUERY_PARAM = "query"
 const val PATH = "/"
 const val assignApiKey = API_PARAM + APPEND_QUERY_PARAMETER + API_KEY
 
@@ -20,22 +20,26 @@ const val BASE_PATH = SCHEME_AUTHORITY + APPEND_PATH_VERSION
 // https://api.themoviedb.org/3/movie/
 const val MOVIE_PATH = SCHEME_AUTHORITY + APPEND_PATH_VERSION + APPEND_PATH_MOVIE + PATH
 
-private const val APPEND_PATH_SEARCH = "search/"
-const val SEARCH_BASE_PATH = "$BASE_PATH$APPEND_PATH_SEARCH$APPEND_PATH_MOVIE$APPEND_URL_ENDPOINT"
+// private const val APPEND_PATH_SEARCH = "search/"
+// const val SEARCH_BASE_PATH = "$BASE_PATH$APPEND_PATH_SEARCH$APPEND_PATH_MOVIE$APPEND_URL_ENDPOINT"
 
 const val TYPE_MOVIES_POPULAR = "popular"
 const val TYPE_MOVIES_TOP_RATED = "top_rated"
 const val TYPE_MOVIES_UPCOMING = "upcoming"
 const val TYPE_MOVIES_NOW_PLAYING = "now_playing"
 const val TYPE_MOVIES_LATEST = "latest"
+const val MOVIE_ID = 27576
 
-const val APPEND_PATH_SIMILAR = "similar"
-const val APPEND_PATH_RECOMMENDATIONS = "recommendations"
+// const val APPEND_PATH_SIMILAR = "similar"
+// const val APPEND_PATH_RECOMMENDATIONS = "recommendations"
 const val ALTERNATIVE_TITLES = "/alternative_titles"
 
-// private const val APPEND_PATH_PERSON = "person"
+const val APPEND_PATH_PERSON = "person"
+const val TYPE_PEOPLE_POPULAR = "popular"
+
+
 // private const val REVIEWS_PATH = "reviews"
-const val APPEND_PATH_CREDITS = "credits"
+// const val APPEND_PATH_CREDITS = "credits"
 
 const val IMAGE_PATH_URL = "https://image.tmdb.org/t/p/w500"
-const val IMAGE_PATH_BANNER_URL = "https://image.tmdb.org/t/p/original"
+// const val IMAGE_PATH_BANNER_URL = "https://image.tmdb.org/t/p/original"
