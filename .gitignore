@@ -3,3 +3,5 @@
 /build/
 /src/main/kotlin/network/apiKey.kt
 /.idea/.name
+/.idea/misc.xml
+/.idea/gradle.xml
