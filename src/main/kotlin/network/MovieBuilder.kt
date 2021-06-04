@@ -1,6 +1,7 @@
 package network
 
 import modal.Movie
+import modal.MovieAlternativeTitles
 import modal.MovieDetails
 import repository.movieDetailsUriBuilder
 import java.net.URI

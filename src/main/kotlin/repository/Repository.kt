@@ -1,6 +1,7 @@
 package repository
 
 import modal.Movie
+import modal.MovieAlternativeTitles
 import modal.MovieDetails
 import network.*
 
@@ -20,5 +21,9 @@ class Repository {
 
     fun getMovieDetails(movieId: Int): MovieDetails? {
         return buildDetailsMovies(movieId)
+    }
+
+    fun getAlternativeTitles(movieId: Int): List<MovieAlternativeTitles> {
+        return buildAlternativeTitles(movieId)
     }
 }
